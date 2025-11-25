@@ -9,9 +9,6 @@ __pycache__/
 *$py.class
 *.so
 
-# Generated images
-generated_image_*.png
-
 # IDE
 .idea/
 .vscode/
