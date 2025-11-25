@@ -70,33 +70,9 @@ def start() -> None:
     response = client.get_completion(messages=[message])
     print(f"\n✅ GPT-4o Response: {response.content}\n")
     
-    # Try with Claude model
     print("="*70)
-    print("Testing with Claude-3-7-Sonnet")
+    print("✅ DIAL-Style Image Analysis completed successfully!")
     print("="*70)
-    
-    claude_client = DialModelClient(
-        endpoint=DIAL_CHAT_COMPLETIONS_ENDPOINT,
-        deployment_name="claude-3-7-sonnet@20250219",
-        api_key=API_KEY
-    )
-    
-    claude_response = claude_client.get_completion(messages=[message])
-    print(f"\n✅ Claude Response: {claude_response.content}\n")
-    
-    # Try with Gemini model
-    print("="*70)
-    print("Testing with Gemini-2.5-Pro")
-    print("="*70)
-    
-    gemini_client = DialModelClient(
-        endpoint=DIAL_CHAT_COMPLETIONS_ENDPOINT,
-        deployment_name="gemini-2.5-pro",
-        api_key=API_KEY
-    )
-    
-    gemini_response = gemini_client.get_completion(messages=[message])
-    print(f"\n✅ Gemini Response: {gemini_response.content}\n")
 
 
 start()

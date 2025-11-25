@@ -78,12 +78,12 @@ def start() -> None:
     
     print(f"\n🎨 Generating image with prompt: '{prompt}'\n")
     
-    # Test with basic configuration
+    # Generate image with DALL-E 3
     response = client.get_completion(
         messages=[message],
         custom_fields={
             "size": Size.square,
-            "quality": Quality.standard,
+            "quality": Quality.hd,
             "style": Style.vivid
         }
     )
@@ -95,57 +95,8 @@ def start() -> None:
     else:
         print("⚠️ No images were generated")
     
-    # Test with HD quality and natural style
     print("\n" + "="*70)
-    print("Testing with HD quality and natural style")
-    print("="*70)
-    
-    hd_response = client.get_completion(
-        messages=[message],
-        custom_fields={
-            "size": Size.height_rectangle,
-            "quality": Quality.hd,
-            "style": Style.natural
-        }
-    )
-    
-    if hd_response.custom_content and hd_response.custom_content.attachments:
-        print(f"\n📎 Generated {len(hd_response.custom_content.attachments)} HD image(s)")
-        asyncio.run(_save_images(hd_response.custom_content.attachments))
-    
-    # Test with Google image generation model
-    print("\n" + "="*70)
-    print("Testing with Google imagegeneration@005")
-    print("="*70)
-    
-    google_client = DialModelClient(
-        endpoint=DIAL_CHAT_COMPLETIONS_ENDPOINT,
-        deployment_name="imagegeneration@005",
-        api_key=API_KEY
-    )
-    
-    google_prompt = "A serene tropical beach in Bali at sunset, photorealistic"
-    google_message = Message(
-        role=Role.USER,
-        content=google_prompt
-    )
-    
-    print(f"\n🎨 Generating image with Google model: '{google_prompt}'\n")
-    
-    google_response = google_client.get_completion(
-        messages=[google_message],
-        custom_fields={
-            "aspectRatio": "16:9",
-            "sampleCount": 1
-        }
-    )
-    
-    if google_response.custom_content and google_response.custom_content.attachments:
-        print(f"\n📎 Generated {len(google_response.custom_content.attachments)} image(s) with Google")
-        asyncio.run(_save_images(google_response.custom_content.attachments))
-    
-    print("\n" + "="*70)
-    print("✅ Text-to-Image generation completed!")
+    print("✅ Text-to-Image generation completed successfully!")
     print("="*70)
 
 
